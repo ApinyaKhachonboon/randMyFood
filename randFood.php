@@ -13,6 +13,7 @@ $foodList = [
 $dLimit = 2;
 $menuCount = 10;
 
+$foodList = array_unique($foodList);
 $foodList = randFood($foodList);
 
 if (count($foodList) * $dLimit < $menuCount) {
