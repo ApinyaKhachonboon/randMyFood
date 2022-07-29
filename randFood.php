@@ -7,7 +7,6 @@ $foodList = [
     "เส้นหมี่ผัด",
     "อกไก่ผัดพริกไทยดำ",
     "อกไก่ผัดผงกะหรี่",
-    "อกไก่ย่างสมุนไพร",
     "สเต็กอกไก่ซอสพริกไทยดำ",
     "ลาบอกไก่สับ",
 ];
@@ -16,7 +15,7 @@ $menuCount = 10;
 
 $foodList = randFood($foodList);
 
-if (count($foodList) * $dLimit < $menuCount * $dLimit) {
+if (count($foodList) * $dLimit < $menuCount) {
     echo "ไม่สามารถทำรายการได้";
     return;
 }
@@ -24,10 +23,10 @@ if (count($foodList) * $dLimit < $menuCount * $dLimit) {
 $rList = [];
 $count = 0;
 $i = 0;
-while ($count <= $menuCount) {
+while ($count < $menuCount) {
     $rand = rand(1, $dLimit);
-    $rList[$foodList[$i++]] = $rand;
-    $count += $rand;
+    $rList[$foodList[$i]] = $count + $rand > $menuCount ? 1 : $rand;
+    $count += $rList[$foodList[$i++]];
 }
 
 printAllMenu($rList);
@@ -41,7 +40,7 @@ function printAllMenu($rList)
 
 function randFood($foodList)
 {
-    for ($i = 0;$i < count($foodList);$i++)
+    for ($i = 0; $i < count($foodList); $i++)
     {
         $rand = rand(0, count($foodList) - 1);
         $temp = $foodList[$i];
